@@ -1,5 +1,5 @@
-import { fetchHighScores } from "/fetch.js";
-import { addHighScores } from "/add.js";
+import { fetchHighScores } from "./fetch.js";
+import { addHighScores } from "./add.js";
 
 let colorlist = ['gold', 'yellow', 'turquoise', 'red']
 

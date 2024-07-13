@@ -1,4 +1,4 @@
-entrypoint = "script.js"
+entrypoint = "/src/index.js"
 
 hidden=[".config"]
 modules = ["nodejs-20"]
