@@ -1,5 +1,10 @@
 import { fetchHighScores } from "./fetch.js";
 import { addHighScores } from "./add.js";
+// import * as planck from "planck";
+// import * as p5 from "p5";
+
+// import * as p5play from"p5play";
+
 
 let colorlist = ['gold', 'yellow', 'turquoise', 'red']
 

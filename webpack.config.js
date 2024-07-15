@@ -32,5 +32,38 @@ module.exports = {
 	devServer: {
 		contentBase: './dist',
 		open: true
-	}
+	},
+
+	devtool: false,
+
+	
+	module: {
+		rules: [
+			{
+				// You can use `regexp`
+				// test: /example\.js$/
+				test: require.resolve("./src/index.js"),
+				use: [
+					{
+						loader: "imports-loader",
+						options: {
+							type: "module",
+							
+							imports: [
+								"namespace planck planck",
+								"namespace p5 p5",
+								"namespace p5play p5play"
+								// "side-effects planck",
+								// "side-effects p5",
+
+								// "side-effects p5play"
+
+								
+							],
+						},
+					},
+				],
+			},
+		],
+	},
 };
