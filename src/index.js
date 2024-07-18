@@ -267,16 +267,16 @@ let highScoreColor = '#d3eddc';
 const sketch = (p, play) => {
   p.preload = () => {
     // backgroundImg = p.loadImage('assets/burritoCat.gif');
-    backgroundImg = p.loadImage('assets/burritoCat.png');
+    backgroundImg = p.loadImage('./assets/burritoCat.png');
     // catcherImg = p.loadImage("assets/plate.gif");
-    catcherImg = p.loadImage('assets/plate.png');
+    catcherImg = p.loadImage('./assets/plate.png');
     // fallingObjectImg1 = p.loadImage("assets/tacoCat1.gif");
-    fallingObjectImg1 = p.loadImage('assets/tacoCat1.png');
+    fallingObjectImg1 = p.loadImage('./assets/tacoCat1.png');
     // fallingObjectImg2 = p.loadImage("assets/tacoCat2.gif");
-    fallingObjectImg2 = p.loadImage('assets/tacoCat2.png');
+    fallingObjectImg2 = p.loadImage('./assets/tacoCat2.png');
     // badFallingObjectImg = p.loadImage("assets/pugBurger.gif");
-     badFallingObjectImg = p.loadImage('assets/pugBurger.png');
-    heartImg = p.loadImage('assets/health.png');
+     badFallingObjectImg = p.loadImage('./assets/pugBurger.png');
+    heartImg = p.loadImage('./assets/health.png');
   };
 
   p.setup = () => {
@@ -292,13 +292,16 @@ const sketch = (p, play) => {
   };
 
   p.draw = () => {
+    p.keyPressed = () => {
+      addHighScores("LSD", 10);
+    }
     //set up screen
       // background(bgColor);
       if (screen == 0) {
-        if (play.directionsButton.mouse.pressed()) {
+        if (directionsButton.mouse.pressed()) {
           screen = 1;
           directionsScreen(p, play);
-        } else if (play.playButton.mouse.pressed()) {
+        } else if (playButton.mouse.pressed()) {
           screen = 2;
 
           playScreenAssets(p, play)
@@ -306,9 +309,9 @@ const sketch = (p, play) => {
       }
 
       if (screen == 1) {
-        if (play.backButton.mouse.pressed()) {
+        if (backButton.mouse.pressed()) {
           screen = 0;
-          play.backButton.pos = {x: -900, y: -900};
+          backButton.pos = {x: -900, y: -900};
           homeScreen(p, play);
         }
       }
@@ -325,14 +328,14 @@ const sketch = (p, play) => {
         if (lives >= 2) {
           p.image(heartImg, 140, 5, 50, 39.808);
           if (lives >= 3) {
-            image(heartImg, 200, 5, 50, 39.808);
+            p.image(heartImg, 200, 5, 50, 39.808);
             if (lives >= 4) {
-              image(heartImg, 260, 5, 50, 39.808);
+              p.image(heartImg, 260, 5, 50, 39.808);
             }
           }
         }
 
-        if (((millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
+        if (((p.millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
           badFallingObject.vel.y = 2;
           fallen = true;
         }
@@ -359,9 +362,9 @@ const sketch = (p, play) => {
         }
 
         //Move catcher
-        if (kb.pressing("left")) {
+        if (play.kb.pressing("left")) {
           catcher.vel.x = -3;
-        } else if (kb.pressing("right")) {
+        } else if (play.kb.pressing("right")) {
           catcher.vel.x = 3;
         } else {
           catcher.vel.x = 0;
@@ -400,20 +403,20 @@ const sketch = (p, play) => {
         }
 
         //Display score
-        textAlign('left', 'bottom');
-        textStyle('bold');
-        textSize(16);
-        fill(textColor);
-        text('Score: ' + score, 10, 25);
+        p.textAlign('left', 'bottom');
+        p.textStyle('bold');
+        p.textSize(16);
+        p.fill(textColor);
+        p.text('Score: ' + score, 10, 25);
 
         if (score >= highScore && score !== 0) {
-          fill(highScoreColor);
+          p.fill(highScoreColor);
           highScore = score; 
           if (newHighScore == false) {
             newHighScore = true;
           }
         } else {
-          fill(textColor);
+          p.fill(textColor);
         }
 
         if (fallingObject.collides(badFallingObject)) {
@@ -422,10 +425,10 @@ const sketch = (p, play) => {
           print('down');
         }
 
-        text('High Score: ' + highScore, 10, 45);
+        p.text('High Score: ' + highScore, 10, 45);
 
-        fill(textColor);
-        text('Level ' + level, 10, 65);
+        p.fill(textColor);
+        p.text('Level ' + level, 10, 65);
 
         console.log('Level = ' + level);
 
@@ -440,27 +443,27 @@ const sketch = (p, play) => {
           catcher.x = 500;
           fallingObject.y = -500;
           badFallingObject.x = -500;
-          background(bgColor);
-          textSize(30);
-          textAlign('center');
-          fill(textColor);
-          text('You lost!', 200, 200);
+          p.background(bgColor);
+          p.textSize(30);
+          p.textAlign('center');
+          p.fill(textColor);
+          p.text('You lost!', 200, 200);
 
-          textSize(15);
-          textStyle('normal');
-          fill(highScoreColor);
-          text('Click anywhere to play again', 200, 220);
+          p.textSize(15);
+          p.textStyle('normal');
+          p.fill(highScoreColor);
+          p.text('Click anywhere to play again', 200, 220);
 
-          textSize(18);
-          textStyle('bold');
-          fill(textColor);
-          text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
+          p.textSize(18);
+          p.textStyle('bold');
+          p.fill(textColor);
+          p.text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
 
-          text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
+          p.text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
 
           if (newHighScore == true) {
-            fill(highScoreColor);
-            text('NEW HIGH SCORE', width/2, height/2 + 140);
+            p.fill(highScoreColor);
+            p.text('NEW HIGH SCORE', width/2, height/2 + 140);
           }
 
           restart();
@@ -484,8 +487,9 @@ const sketch = (p, play) => {
       //debug
       // allSprites.debug = mouse.pressing();
     
-  }
-}
+  };
+
+};
 
 
 
@@ -532,19 +536,19 @@ function youWin() {
   }
 }
 
-function homeScreen() {
-  background(bgColor);
+function homeScreen(p, play) {
+  p.background(bgColor);
 
-  fill(textColor);
-  textSize(40);
-  textStyle('bold');
-  textAlign(CENTER);
-  stroke(highScoreColor);
-  strokeWeight(2);
-  text("Taco Cat Catcher", width/2, height/2 - 80);
+  p.fill(textColor);
+  p.textSize(40);
+  p.textStyle('bold');
+  p.textAlign(CENTER);
+  p.stroke(highScoreColor);
+  p.strokeWeight(2);
+  p.text("Taco Cat Catcher", width/2, height/2 - 80);
 
-  textStyle('normal');
-  noStroke();
+  p.textStyle('normal');
+  p.noStroke();
 
   //navigationButtons
   directionsButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
@@ -564,8 +568,8 @@ function homeScreen() {
   playButton.strokeWeight = 3;
 }
 
-function directionsScreen() {
-  background(bgColor);
+function directionsScreen(p, play) {
+  p.background(bgColor);
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
@@ -577,27 +581,27 @@ function directionsScreen() {
   backButton.stroke = highScoreColor;
   backButton.strokeWeight = 3;
 
-  fill(textColor);
-  stroke(highScoreColor);
-  strokeWeight(2);
-  textSize(40);
-  textStyle('bold');
-  textAlign(CENTER);
-  text("How to Play", width/2, height/2 - 100);
+  p.fill(textColor);
+  p.stroke(highScoreColor);
+  p.strokeWeight(2);
+  p.textSize(40);
+  p.textStyle('bold');
+  p.textAlign(CENTER);
+  p.text("How to Play", width/2, height/2 - 100);
 
-  textStyle('normal');
-  noStroke();
+  p.textStyle('normal');
+  p.noStroke();
 
   // Draw directions to screen
-  rectMode(CENTER);
-  fill(textColor);
-  textSize(18);
-  textAlign(CENTER);
-  text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
+  p.rectMode(CENTER);
+  p.fill(textColor);
+  p.textSize(18);
+  p.textAlign(CENTER);
+  p.text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
 }
 
-function playScreenAssets() {
-  timeUntilPlay = millis();
+function playScreenAssets(p, play) {
+  timeUntilPlay = p.millis();
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
@@ -621,7 +625,7 @@ function playScreenAssets() {
   badFallingObject.rotationLock = true;  
 }
 
-function checkLevel() {
+function checkLevel(p, play) {
   if (score % 5 == 0 && score !== 0) {
     if (level !== score/5 + 1) {
       level = score/5 + 1;
@@ -642,6 +646,3 @@ function checkLevel() {
   }
 }
 
-function keyPressed() {
-  addHighScores("LSD", 10);
-}
