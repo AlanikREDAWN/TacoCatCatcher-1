@@ -2,7 +2,9 @@
 
 //Move the catcher with the left and right arrow keys to catch the falling objects. 
 
-// import * as p5 from 'p5';
+import * as planck from 'planck';
+import * as p5 from 'p5';
+import * as p5play from 'p5play';
 import { fetchHighScores } from "./fetch.js";
 import { addHighScores } from "./add.js";
 
@@ -25,11 +27,18 @@ let timeUntilPlay, loadTime;
 let fallen = false;
 // let checkLevelLoop = 0;
 //images
+import backgroundImgPath from './assets/burritoCat.png';
+import catcherImgPath from './assets/plate.png';
+import fallingObjectImg1Path from './assets/tacoCat1.png';
+import fallingObjectImg2Path from './assets/tacoCat2.png';
+import badFallingObjectImgPath from './assets/pugBurger.png';
+import heartImgPath from './assets/health.png';
 var backgroundImg;
 var catcherImg;
 var fallingObjectImg1;
 var fallingObjectImg2;
 var badFallingObjectImg;
+var heartImg;
 // let fallingObjects; -> see line 39
 //colors
 let rebeccaPurple = '#6c5190';
@@ -38,240 +47,15 @@ var bgColor = '#4ECDC4';
 let textColor = '#008080';
 let highScoreColor = '#d3eddc';
 
-// /* PRELOAD LOADS FILES */
-// function preload() {
-//   // backgroundImg = loadImage('assets/burritoCat.gif');
-//   backgroundImg = loadImage('assets/burritoCat.png');
-//   // catcherImg = loadImage("assets/plate.gif");
-//   catcherImg = loadImage('assets/plate.png');
-//   // fallingObjectImg1 = loadImage("assets/tacoCat1.gif");
-//   fallingObjectImg1 = loadImage('assets/tacoCat1.png');
-//   // fallingObjectImg2 = loadImage("assets/tacoCat2.gif");
-//   fallingObjectImg2 = loadImage('assets/tacoCat2.png');
-//   // badFallingObjectImg = loadImage("assets/pugBurger.gif");
-//    badFallingObjectImg = loadImage('assets/pugBurger.png');
-//   heartImg = loadImage('assets/health.png');
-// }
-
-// /* SETUP RUNS ONCE */
-// function setup() {
-
-
-//   createCanvas(400, 400);
-
-//   time = millis();
-//   // fallingObjects = [fallingObjectImg1, fallingObjectImg2]; -> TO-DO: figure out how to make image for fallingObject sprite random (50% chance of each image)
-
-//   //debug
-//   // allSprites.debug = true;
-//   homeScreen();
-//   loadTime = millis();
-// }
-
-// /* DRAW LOOP REPEATS */
-// function draw() {
-//   //set up screen
-//   // background(bgColor);
-//   if (screen == 0) {
-//     if (directionsButton.mouse.pressed()) {
-//       screen = 1;
-//       directionsScreen();
-//     } else if (playButton.mouse.pressed()) {
-//       screen = 2;
-
-//       playScreenAssets()
-//     }
-//   }
-
-//   if (screen == 1) {
-//     if (backButton.mouse.pressed()) {
-//       screen = 0;
-//       backButton.pos = {x: -900, y: -900};
-//       homeScreen();
-//     }
-//   }
-
-//   if (screen == 2) {
-
-//     //set up screen
-//     background(bgColor);
-
-//     //Draw background image
-//     image(backgroundImg, 330, 5, 60, 79.711);
-
-//     //draw lives
-//     if (lives >= 2) {
-//       image(heartImg, 140, 5, 50, 39.808);
-//       if (lives >= 3) {
-//         image(heartImg, 200, 5, 50, 39.808);
-//         if (lives >= 4) {
-//           image(heartImg, 260, 5, 50, 39.808);
-//         }
-//       }
-//     }
-
-//     if (((millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
-//       badFallingObject.vel.y = 2;
-//       fallen = true;
-//     }
-
-//     if (fallingObject.img == fallingObjectImg1) {
-//       fallingObject.img.scale = 0.0223;
-//     } else if (fallingObject.img == fallingObjectImg2) {
-//       fallingObject.img.scale = 0.088;
-//     }
-
-//     //If fallingObject reaches bottom, move back to random position at top
-//     if (fallingObject.y >= height) {
-//       fallingObject.y = 0;
-//       fallingObject.x = random(width);
-//       fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-//       // score -= 1;
-//       lives -= 1;
-//     }
-//     //If badFallingObject reaches bottom, move back to random position at top
-//     if (badFallingObject.y >= height) {
-//       badFallingObject.y = 0;
-//       badFallingObject.x = random(width);
-//       badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-//     }
-
-//     //Move catcher
-//     if (kb.pressing("left")) {
-//       catcher.vel.x = -3;
-//     } else if (kb.pressing("right")) {
-//       catcher.vel.x = 3;
-//     } else {
-//       catcher.vel.x = 0;
-//     }
-
-//     //Stop catcher at edges of screen
-//     if (catcher.x < 50) {
-//       catcher.x = 50;
-//     } else if (catcher.x > 350) {
-//       catcher.x = 350;
-//     }
-
-//     //If fallingObject collides with catcher, move back to random position at top
-//     if (fallingObject.collides(catcher)) {
-//       fallingObject.y = 0;
-//       fallingObject.x = random(width);
-//       fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-//       fallingObject.direction = 'down';
-//       score += 1;
-//     }
-
-//     //If badFallingObject collides with catcher, move back to random position at top
-//     if (badFallingObject.collides(catcher)) {
-//       badFallingObject.y = 0;
-//       badFallingObject.x = random(width);
-//       badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-//       badFallingObject.direction = 'down';
-//       // score -= 1;
-//       lives -= 1;
-//     }
-
-//     if (fallingObject.collides(badFallingObject)) {
-//       fallingObject.direction = 'down';
-//       badFallingObject.direction = 'down';
-//       print('down');
-//     }
-
-//     //Display score
-//     textAlign('left', 'bottom');
-//     textStyle('bold');
-//     textSize(16);
-//     fill(textColor);
-//     text('Score: ' + score, 10, 25);
-
-//     if (score >= highScore && score !== 0) {
-//       fill(highScoreColor);
-//       highScore = score; 
-//       if (newHighScore == false) {
-//         newHighScore = true;
-//       }
-//     } else {
-//       fill(textColor);
-//     }
-
-//     if (fallingObject.collides(badFallingObject)) {
-//       fallingObject.direction = 'down';
-//       badFallingObject.direction = 'down';
-//       print('down');
-//     }
-
-//     text('High Score: ' + highScore, 10, 45);
-
-//     fill(textColor);
-//     text('Level ' + level, 10, 65);
-
-//     console.log('Level = ' + level);
-
-//     fallingObject.direction = 'down';
-//     badFallingObject.direction = 'down';
-
-//     checkLevel();
-
-
-//     //Create lose state
-//     if (lives < 1) {
-//       catcher.x = 500;
-//       fallingObject.y = -500;
-//       badFallingObject.x = -500;
-//       background(bgColor);
-//       textSize(30);
-//       textAlign('center');
-//       fill(textColor);
-//       text('You lost!', 200, 200);
-
-//       textSize(15);
-//       textStyle('normal');
-//       fill(highScoreColor);
-//       text('Click anywhere to play again', 200, 220);
-
-//       textSize(18);
-//       textStyle('bold');
-//       fill(textColor);
-//       text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
-
-//       text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
-
-//       if (newHighScore == true) {
-//         fill(highScoreColor);
-//         text('NEW HIGH SCORE', width/2, height/2 + 140);
-//       }
-
-//       restart();
-//     }
-
-//     // youWin();
-
-//   }
-//   // //set up screen
-//   // background(bgColor);
-//   // //Draw background image
-//   // image(backgroundImg, 280, 5);
-
-//   // fill(textColor);
-//   // textSize(12);
-//   // // Draw directions to screen
-//   // textAlign('right', 'baseline');
-//   // text("Move the plate \n with the left and \n right arrow keys \n to catch the taco \n cats and avoid \n the imposters", width-10, 20);
-
-
-//   //debug
-//   // allSprites.debug = mouse.pressing();
-// }
-
 
 const sketch = (p, play) => {
   p.preload = () => {
     // backgroundImg = p.loadImage('assets/burritoCat.gif');
-    backgroundImg = p.loadImage('./assets/burritoCat.png');
+    backgroundImg = p.loadImage(backgroudImgPath);
     // catcherImg = p.loadImage("assets/plate.gif");
-    catcherImg = p.loadImage('./assets/plate.png');
+    catcherImg = p.loadImage(catcherImgPath);
     // fallingObjectImg1 = p.loadImage("assets/tacoCat1.gif");
-    fallingObjectImg1 = p.loadImage('./assets/tacoCat1.png');
+    fallingObjectImg1 = p.loadImage(fallingObjectImg1Path);
     // fallingObjectImg2 = p.loadImage("assets/tacoCat2.gif");
     fallingObjectImg2 = p.loadImage('./assets/tacoCat2.png');
     // badFallingObjectImg = p.loadImage("assets/pugBurger.gif");
@@ -646,3 +430,231 @@ function checkLevel(p, play) {
   }
 }
 
+new p5(sketch);
+
+/*
+/*
+// /* PRELOAD LOADS FILES */
+// function preload() {
+//   // backgroundImg = loadImage('assets/burritoCat.gif');
+//   backgroundImg = loadImage('assets/burritoCat.png');
+//   // catcherImg = loadImage("assets/plate.gif");
+//   catcherImg = loadImage('assets/plate.png');
+//   // fallingObjectImg1 = loadImage("assets/tacoCat1.gif");
+//   fallingObjectImg1 = loadImage('assets/tacoCat1.png');
+//   // fallingObjectImg2 = loadImage("assets/tacoCat2.gif");
+//   fallingObjectImg2 = loadImage('assets/tacoCat2.png');
+//   // badFallingObjectImg = loadImage("assets/pugBurger.gif");
+//    badFallingObjectImg = loadImage('assets/pugBurger.png');
+//   heartImg = loadImage('assets/health.png');
+// }
+
+// /* SETUP RUNS ONCE */
+// function setup() {
+
+
+//   createCanvas(400, 400);
+
+//   time = millis();
+//   // fallingObjects = [fallingObjectImg1, fallingObjectImg2]; -> TO-DO: figure out how to make image for fallingObject sprite random (50% chance of each image)
+
+//   //debug
+//   // allSprites.debug = true;
+//   homeScreen();
+//   loadTime = millis();
+// }
+
+// /* DRAW LOOP REPEATS */
+// function draw() {
+//   //set up screen
+//   // background(bgColor);
+//   if (screen == 0) {
+//     if (directionsButton.mouse.pressed()) {
+//       screen = 1;
+//       directionsScreen();
+//     } else if (playButton.mouse.pressed()) {
+//       screen = 2;
+
+//       playScreenAssets()
+//     }
+//   }
+
+//   if (screen == 1) {
+//     if (backButton.mouse.pressed()) {
+//       screen = 0;
+//       backButton.pos = {x: -900, y: -900};
+//       homeScreen();
+//     }
+//   }
+
+//   if (screen == 2) {
+
+//     //set up screen
+//     background(bgColor);
+
+//     //Draw background image
+//     image(backgroundImg, 330, 5, 60, 79.711);
+
+//     //draw lives
+//     if (lives >= 2) {
+//       image(heartImg, 140, 5, 50, 39.808);
+//       if (lives >= 3) {
+//         image(heartImg, 200, 5, 50, 39.808);
+//         if (lives >= 4) {
+//           image(heartImg, 260, 5, 50, 39.808);
+//         }
+//       }
+//     }
+
+//     if (((millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
+//       badFallingObject.vel.y = 2;
+//       fallen = true;
+//     }
+
+//     if (fallingObject.img == fallingObjectImg1) {
+//       fallingObject.img.scale = 0.0223;
+//     } else if (fallingObject.img == fallingObjectImg2) {
+//       fallingObject.img.scale = 0.088;
+//     }
+
+//     //If fallingObject reaches bottom, move back to random position at top
+//     if (fallingObject.y >= height) {
+//       fallingObject.y = 0;
+//       fallingObject.x = random(width);
+//       fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+//       // score -= 1;
+//       lives -= 1;
+//     }
+//     //If badFallingObject reaches bottom, move back to random position at top
+//     if (badFallingObject.y >= height) {
+//       badFallingObject.y = 0;
+//       badFallingObject.x = random(width);
+//       badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+//     }
+
+//     //Move catcher
+//     if (kb.pressing("left")) {
+//       catcher.vel.x = -3;
+//     } else if (kb.pressing("right")) {
+//       catcher.vel.x = 3;
+//     } else {
+//       catcher.vel.x = 0;
+//     }
+
+//     //Stop catcher at edges of screen
+//     if (catcher.x < 50) {
+//       catcher.x = 50;
+//     } else if (catcher.x > 350) {
+//       catcher.x = 350;
+//     }
+
+//     //If fallingObject collides with catcher, move back to random position at top
+//     if (fallingObject.collides(catcher)) {
+//       fallingObject.y = 0;
+//       fallingObject.x = random(width);
+//       fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+//       fallingObject.direction = 'down';
+//       score += 1;
+//     }
+
+//     //If badFallingObject collides with catcher, move back to random position at top
+//     if (badFallingObject.collides(catcher)) {
+//       badFallingObject.y = 0;
+//       badFallingObject.x = random(width);
+//       badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+//       badFallingObject.direction = 'down';
+//       // score -= 1;
+//       lives -= 1;
+//     }
+
+//     if (fallingObject.collides(badFallingObject)) {
+//       fallingObject.direction = 'down';
+//       badFallingObject.direction = 'down';
+//       print('down');
+//     }
+
+//     //Display score
+//     textAlign('left', 'bottom');
+//     textStyle('bold');
+//     textSize(16);
+//     fill(textColor);
+//     text('Score: ' + score, 10, 25);
+
+//     if (score >= highScore && score !== 0) {
+//       fill(highScoreColor);
+//       highScore = score; 
+//       if (newHighScore == false) {
+//         newHighScore = true;
+//       }
+//     } else {
+//       fill(textColor);
+//     }
+
+//     if (fallingObject.collides(badFallingObject)) {
+//       fallingObject.direction = 'down';
+//       badFallingObject.direction = 'down';
+//       print('down');
+//     }
+
+//     text('High Score: ' + highScore, 10, 45);
+
+//     fill(textColor);
+//     text('Level ' + level, 10, 65);
+
+//     console.log('Level = ' + level);
+
+//     fallingObject.direction = 'down';
+//     badFallingObject.direction = 'down';
+
+//     checkLevel();
+
+
+//     //Create lose state
+//     if (lives < 1) {
+//       catcher.x = 500;
+//       fallingObject.y = -500;
+//       badFallingObject.x = -500;
+//       background(bgColor);
+//       textSize(30);
+//       textAlign('center');
+//       fill(textColor);
+//       text('You lost!', 200, 200);
+
+//       textSize(15);
+//       textStyle('normal');
+//       fill(highScoreColor);
+//       text('Click anywhere to play again', 200, 220);
+
+//       textSize(18);
+//       textStyle('bold');
+//       fill(textColor);
+//       text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
+
+//       text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
+
+//       if (newHighScore == true) {
+//         fill(highScoreColor);
+//         text('NEW HIGH SCORE', width/2, height/2 + 140);
+//       }
+
+//       restart();
+//     }
+
+//     // youWin();
+
+//   }
+//   // //set up screen
+//   // background(bgColor);
+//   // //Draw background image
+//   // image(backgroundImg, 280, 5);
+
+//   // fill(textColor);
+//   // textSize(12);
+//   // // Draw directions to screen
+//   // textAlign('right', 'baseline');
+//   // text("Move the plate \n with the left and \n right arrow keys \n to catch the taco \n cats and avoid \n the imposters", width-10, 20);
+
+
+//   //debug
+//   // allSprites.debug = mouse.pressing();
+// }

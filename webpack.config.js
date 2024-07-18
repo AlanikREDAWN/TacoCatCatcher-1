@@ -1,3 +1,6 @@
+// const DashboardPlugin = require("webpack-dashboard/plugin");
+const InstallPlugin = require("install-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
@@ -20,7 +23,32 @@ module.exports = {
 			silent: false, // hide any errors
 			defaults: false, // load '.env.defaults' as the default values if empty.
 			prefix: 'process.env.' // reference your env variables as 'enviro.ENV_VAR'.
-		})
+		}),
+		new InstallPlugin({
+			dependencies: {
+				peer: true,
+			},
+			packageManager: {
+				type: 'npm',
+				options: {
+					dev: true,
+					quiet: true,
+				},
+			},
+			prompt: true,
+		}),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: "./src/assets",
+					to({ context, absoluteFilename }) {
+						return 'assets/';
+					},
+					toType: "dir",
+				},
+			],
+		}),
+		// new DashboardPlugin()
 	],
 
 	mode: 'development',
@@ -29,10 +57,10 @@ module.exports = {
 		clean: true
 	},
 
-	devServer: {
-		contentBase: './dist',
-		open: true
-	},
+	// devServer: {
+	// 	contentBase: './dist',
+	// 	open: true
+	// },
 
 	// devtool: "#inline-source-map",
 
@@ -40,30 +68,34 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				// You can use `regexp`
-				// test: /example\.js$/
-				test: require.resolve("./src/index.js"),
-				use: [
-					{
-						loader: "imports-loader",
-						options: {
-							type: "module",
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: 'asset/resource',
+			},
+	// 		{
+	// 			// You can use `regexp`
+	// 			// test: /example\.js$/
+	// 			test: require.resolve("./src/index.js"),
+	// 			use: [
+	// 				{
+	// 					loader: "imports-loader",
+	// 					options: {
+	// 						type: "module",
 							
-							imports: [
-								"namespace planck planck",
-								"namespace p5 p5",
-								"namespace p5play p5play"
-								// "side-effects planck",
-								// "side-effects p5",
+	// 						imports: [
+	// 							"namespace planck planck",
+	// 							"namespace p5 p5",
+	// 							"namespace p5play p5play"
+	// 							// "side-effects planck",
+	// 							// "side-effects p5",
 
-								// "side-effects p5play"
+	// 							// "side-effects p5play"
 
 								
-							],
-						},
-					},
-				],
-			},
+	// 						],
+	// 					},
+	// 				},
+	// 			],
+	// 		},
 		],
 	},
 };

@@ -183,3 +183,7 @@ pattern = "**/{*.less,*.scss,*.css}"
 [deployment]
 deploymentTarget = "static"
 publicDir = "/"
+
+[[ports]]
+localPort = 9838
+externalPort = 80
