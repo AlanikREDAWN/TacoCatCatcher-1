@@ -51,16 +51,16 @@ let highScoreColor = '#d3eddc';
 const sketch = (p, play) => {
   p.preload = () => {
     // backgroundImg = p.loadImage('assets/burritoCat.gif');
-    backgroundImg = p.loadImage(backgroudImgPath);
+    backgroundImg = p.loadImage('./bf5ac956662ba04a86d7.png');
     // catcherImg = p.loadImage("assets/plate.gif");
     catcherImg = p.loadImage(catcherImgPath);
     // fallingObjectImg1 = p.loadImage("assets/tacoCat1.gif");
     fallingObjectImg1 = p.loadImage(fallingObjectImg1Path);
     // fallingObjectImg2 = p.loadImage("assets/tacoCat2.gif");
-    fallingObjectImg2 = p.loadImage('./assets/tacoCat2.png');
+    fallingObjectImg2 = p.loadImage(fallingObjectImg2Path);
     // badFallingObjectImg = p.loadImage("assets/pugBurger.gif");
-     badFallingObjectImg = p.loadImage('./assets/pugBurger.png');
-    heartImg = p.loadImage('./assets/health.png');
+     badFallingObjectImg = p.loadImage(badFallingObjectImgPath);
+    heartImg = p.loadImage(heartImgPath);
   };
 
   p.setup = () => {
