@@ -51,12 +51,12 @@ let highScoreColor = '#d3eddc';
 new p5((p, play) => {
   p.preload = () => {
     console.log(backgroundImgPath);
-    backgroundImg = p.loadImage('/assets/burritoCat.png');
-    catcherImg = p.loadImage('/assets/plate.png');
-    fallingObjectImg1 = p.loadImage('/assets/tacoCat1.png');
-    fallingObjectImg2 = p.loadImage('/assets/tacoCat2.png');
-     badFallingObjectImg = p.loadImage('/assets/pugBurger.png');
-    heartImg = p.loadImage('/assets/health.png');
+    backgroundImg = p.loadImage(backgroundImgPath);
+    catcherImg = p.loadImage(catcherImgPath);
+    fallingObjectImg1 = p.loadImage(fallingObjectImg1Path);
+    fallingObjectImg2 = p.loadImage(fallingObjectImg2Path);
+     badFallingObjectImg = p.loadImage(badFallingObjectImgPath);
+    heartImg = p.loadImage(heartImgPath);
   };
 
   p.setup = () => {
