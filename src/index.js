@@ -2,8 +2,9 @@
 
 //Move the catcher with the left and right arrow keys to catch the falling objects. 
 
+// import('planck.js');
 import * as planck from 'planck';
-import * as p5 from 'p5';
+import p5 from 'p5';
 import * as p5play from 'p5play';
 import { fetchHighScores } from "./fetch.js";
 import { addHighScores } from "./add.js";
@@ -47,20 +48,14 @@ var bgColor = '#4ECDC4';
 let textColor = '#008080';
 let highScoreColor = '#d3eddc';
 
-
-const sketch = (p, play) => {
+new p5((p, play) => {
   p.preload = () => {
-    // backgroundImg = p.loadImage('assets/burritoCat.gif');
     backgroundImg = p.loadImage('./bf5ac956662ba04a86d7.png');
-    // catcherImg = p.loadImage("assets/plate.gif");
-    catcherImg = p.loadImage(catcherImgPath);
-    // fallingObjectImg1 = p.loadImage("assets/tacoCat1.gif");
-    fallingObjectImg1 = p.loadImage(fallingObjectImg1Path);
-    // fallingObjectImg2 = p.loadImage("assets/tacoCat2.gif");
-    fallingObjectImg2 = p.loadImage(fallingObjectImg2Path);
-    // badFallingObjectImg = p.loadImage("assets/pugBurger.gif");
-     badFallingObjectImg = p.loadImage(badFallingObjectImgPath);
-    heartImg = p.loadImage(heartImgPath);
+    catcherImg = p.loadImage('./22ab75707da386c3cf7b.png');
+    fallingObjectImg1 = p.loadImage('./9341e30d426429491350.png');
+    fallingObjectImg2 = p.loadImage('./680f7b14db0923899f7e.png');
+     badFallingObjectImg = p.loadImage('./fafbc1dbe5100535b7f0.png');
+    heartImg = p.loadImage('./ce8edeb9752b521ce2c0.png');
   };
 
   p.setup = () => {
@@ -75,6 +70,12 @@ const sketch = (p, play) => {
     loadTime = p.millis();
   };
 
+  
+})
+
+export const sketch = (p: p5) => {
+  
+
   p.draw = () => {
     p.keyPressed = () => {
       addHighScores("LSD", 10);
@@ -84,11 +85,11 @@ const sketch = (p, play) => {
       if (screen == 0) {
         if (directionsButton.mouse.pressed()) {
           screen = 1;
-          directionsScreen(p, play);
+          directionsScreen(p);
         } else if (playButton.mouse.pressed()) {
           screen = 2;
 
-          playScreenAssets(p, play)
+          playScreenAssets(p, play);
         }
       }
 
@@ -96,7 +97,7 @@ const sketch = (p, play) => {
         if (backButton.mouse.pressed()) {
           screen = 0;
           backButton.pos = {x: -900, y: -900};
-          homeScreen(p, play);
+          homeScreen(p);
         }
       }
 
@@ -335,7 +336,7 @@ function homeScreen(p, play) {
   p.noStroke();
 
   //navigationButtons
-  directionsButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
+  directionsButton = new play.Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
   directionsButton.color = textColor;
   directionsButton.text = "How to Play";
   directionsButton.textSize = 16;
@@ -343,7 +344,7 @@ function homeScreen(p, play) {
   directionsButton.stroke = highScoreColor;
   directionsButton.strokeWeight = 3;
 
-  playButton = new Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
+  playButton = new play.Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
   playButton.color = textColor;
   playButton.text = "Play";
   playButton.textSize = 16;
@@ -352,7 +353,7 @@ function homeScreen(p, play) {
   playButton.strokeWeight = 3;
 }
 
-function directionsScreen(p, play) {
+function directionsScreen(p) {
   p.background(bgColor);
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
@@ -409,7 +410,7 @@ function playScreenAssets(p, play) {
   badFallingObject.rotationLock = true;  
 }
 
-function checkLevel(p, play) {
+function checkLevel(p) {
   if (score % 5 == 0 && score !== 0) {
     if (level !== score/5 + 1) {
       level = score/5 + 1;
@@ -430,7 +431,7 @@ function checkLevel(p, play) {
   }
 }
 
-new p5(sketch);
+export const myp5 = new p5(sketch, document.body);
 
 /*
 /*
