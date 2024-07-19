@@ -50,12 +50,13 @@ let highScoreColor = '#d3eddc';
 
 new p5((p, play) => {
   p.preload = () => {
-    backgroundImg = p.loadImage('./bf5ac956662ba04a86d7.png');
-    catcherImg = p.loadImage('./22ab75707da386c3cf7b.png');
-    fallingObjectImg1 = p.loadImage('./9341e30d426429491350.png');
-    fallingObjectImg2 = p.loadImage('./680f7b14db0923899f7e.png');
-     badFallingObjectImg = p.loadImage('./fafbc1dbe5100535b7f0.png');
-    heartImg = p.loadImage('./ce8edeb9752b521ce2c0.png');
+    console.log(backgroundImgPath);
+    backgroundImg = p.loadImage('/assets/burritoCat.png');
+    catcherImg = p.loadImage('/assets/plate.png');
+    fallingObjectImg1 = p.loadImage('/assets/tacoCat1.png');
+    fallingObjectImg2 = p.loadImage('/assets/tacoCat2.png');
+     badFallingObjectImg = p.loadImage('/assets/pugBurger.png');
+    heartImg = p.loadImage('/assets/health.png');
   };
 
   p.setup = () => {
@@ -70,12 +71,6 @@ new p5((p, play) => {
     loadTime = p.millis();
   };
 
-  
-})
-
-export const sketch = (p: p5) => {
-  
-
   p.draw = () => {
     p.keyPressed = () => {
       addHighScores("LSD", 10);
@@ -85,7 +80,7 @@ export const sketch = (p: p5) => {
       if (screen == 0) {
         if (directionsButton.mouse.pressed()) {
           screen = 1;
-          directionsScreen(p);
+          directionsScreen(p, play);
         } else if (playButton.mouse.pressed()) {
           screen = 2;
 
@@ -97,7 +92,7 @@ export const sketch = (p: p5) => {
         if (backButton.mouse.pressed()) {
           screen = 0;
           backButton.pos = {x: -900, y: -900};
-          homeScreen(p);
+          homeScreen(p, play);
         }
       }
 
@@ -271,10 +266,11 @@ export const sketch = (p: p5) => {
 
       //debug
       // allSprites.debug = mouse.pressing();
-    
-  };
 
-};
+  };
+})
+
+
 
 
 
@@ -353,12 +349,12 @@ function homeScreen(p, play) {
   playButton.strokeWeight = 3;
 }
 
-function directionsScreen(p) {
+function directionsScreen(p, play) {
   p.background(bgColor);
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
-  backButton = new Sprite(width/2, height/2 + 80, 100, 70, 'k');
+  backButton = new play.Sprite(width/2, height/2 + 80, 100, 70, 'k');
   backButton.color = textColor;
   backButton.text = "Home";
   backButton.textSize = 16;
@@ -391,19 +387,19 @@ function playScreenAssets(p, play) {
   directionsButton.pos = {x: -800, y: -800};
 
   //Create catcher 
-  catcher = new Sprite(catcherImg, 200, 370, 80, 50, 'k');
+  catcher = new play.Sprite(catcherImg, 200, 370, 80, 50, 'k');
   catcher.color = color(95,158,160);
   catcher.img.scale = 0.1563;
 
   //Create falling objects
-  fallingObject = new Sprite(fallingObjectImg1, 100, 0, 45, 42);
+  fallingObject = new play.Sprite(fallingObjectImg1, 100, 0, 45, 42);
   // fallingObject.color = color(0,128,128);
   // fallingObject.img.scale = 0.0223;
   fallingObject.vel.y = 2;
   fallingObject.rotationLock = true;
 
   //TO-DO: figure out if I can delay the creation of this sprite for a few secs
-  badFallingObject = new Sprite(badFallingObjectImg, 150, -20, 35, 40);
+  badFallingObject = new play.Sprite(badFallingObjectImg, 150, -20, 35, 40);
   badFallingObject.color = color(0,128,128);
   badFallingObject.img.scale = 0.09;
 
@@ -431,7 +427,6 @@ function checkLevel(p) {
   }
 }
 
-export const myp5 = new p5(sketch, document.body);
 
 /*
 /*
