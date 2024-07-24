@@ -48,7 +48,7 @@ var bgColor = '#4ECDC4';
 let textColor = '#008080';
 let highScoreColor = '#d3eddc';
 
-new p5((p, play) => {
+new p5 ((p, play) => {
   p.preload = () => {
     console.log(backgroundImgPath);
     backgroundImg =     backgroundImg = p.loadImage('/dist/assets/burritoCat.png');
