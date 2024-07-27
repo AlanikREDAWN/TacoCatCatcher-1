@@ -1,4 +1,4 @@
-/// <reference types="p5/global" />
+// / <reference types="p5/global" />
 
 //Move the catcher with the left and right arrow keys to catch the falling objects. 
 
@@ -7,7 +7,7 @@ import * as planck from 'planck';
 import p5 from 'p5';
 import * as p5play from 'p5play';
 import { fetchHighScores } from "./fetch.js";
-import { addHighScores } from "./add.js";
+import { addHighScores } from "../tacoCatCatcher/src/add.js";
 
 /* VARIABLES */
 //sprites
@@ -51,7 +51,7 @@ let highScoreColor = '#d3eddc';
 new p5 ((p, play) => {
   p.preload = () => {
     console.log(backgroundImgPath);
-    backgroundImg =     backgroundImg = p.loadImage('/dist/assets/burritoCat.png');
+      backgroundImg = p.loadImage('/dist/assets/burritoCat.png');
       catcherImg = p.loadImage('/dist/assets/plate.png');
       fallingObjectImg1 = p.loadImage('/dist/assets/tacoCat1.png');
       fallingObjectImg2 = p.loadImage('/dist/assets/tacoCat2.png');
