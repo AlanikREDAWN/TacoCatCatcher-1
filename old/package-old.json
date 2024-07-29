@@ -1,0 +1,37 @@
+{
+  "name": "tacocatcatcher-1",
+  "version": "1.0.0",
+  "description": "This game was started in the 2024 Girls Who Code SIP (Summer Immersion Program), and after becoming an alumni, I found Hack Club and decided to fully flesh out my game and make it into something unique. So, here I am!",
+  "main": "/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.24.8",
+    "@supabase/supabase-js": "^2.44.3",
+    "babel-loader": "^9.1.3",
+    "p5": "^1.9.4",
+    "p5js-wrapper": "^1.2.3",
+    "p5play": "^3.22.11",
+    "planck": "^1.0.2",
+    "supabase": "^1.183.5"
+  },
+  "devDependencies": {
+    "@types/p5": "^1.7.6",
+    "copy-webpack-plugin": "^12.0.2",
+    "dotenv-webpack": "^8.1.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "imports-loader": "^5.0.0",
+    "install-webpack-plugin": "^4.0.6",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dashboard": "^3.3.8"
+  }
+}

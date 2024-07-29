@@ -7,7 +7,7 @@ import * as planck from 'planck';
 import p5 from 'p5';
 import * as p5play from 'p5play';
 import { fetchHighScores } from "./fetch.js";
-import { addHighScores } from "./add.js";
+import { addHighScores } from "../../src/add.js";
 
 /* VARIABLES */
 //sprites
