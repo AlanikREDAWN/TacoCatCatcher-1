@@ -1,6 +1,6 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
-import * as planck from 'planck';
+await import('planck');
 import * as p5play from 'p5play';
 import { fetchHighScores } from "/src/fetch.js";
 import { addHighScores } from "/src/add.js";
@@ -49,10 +49,17 @@ sketch.preload = function(){
   fallingObjectImg2 = loadImage('/src/assets/tacoCat2.png');
   badFallingObjectImg = loadImage('/src/assets/pugBurger.png');
   heartImg = loadImage('/src/assets/health.png');
+
+  backgroundImg = loadImage('/src/assets/burritoCat.png');
+  catcherImg = loadImage('/src/assets/plate.png');
+  fallingObjectImg1 = loadImage('/src/assets/tacoCat1.png');
+  fallingObjectImg2 = loadImage('/src/assets/tacoCat2.png');
+  badFallingObjectImg = loadImage('/src/assets/pugBurger.png');
+  heartImg = loadImage('/src/assets/health.png');
 }
 
 sketch.setup = function(){
-  createCanvas(400, 400);
+  sketch.createCanvas(400, 400);
 
   time = millis();
     // fallingObjects = [fallingObjectImg1, fallingObjectImg2]; -> TO-DO: figure out how to make image for fallingObject sprite random (50% chance of each image)
