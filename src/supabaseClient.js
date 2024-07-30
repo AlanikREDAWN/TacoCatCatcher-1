@@ -4,7 +4,9 @@ import { createClient } from '@supabase/supabase-js';
 // dotenv.config();
 // Create a single supabase client for interacting with your database
 const supabaseUrl = 'https://mclocptznsrsjhomxkyo.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseKey = import.meta.env.SUPABASE_KEY;
+console.log(eval(supabaseKey));
+const supabase = createClient(supabaseUrl, eval(supabaseKey));
+
 
 export { supabase };
