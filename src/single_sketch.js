@@ -1,7 +1,8 @@
 import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
-// await import('planck');
-// import * as p5play from 'p5play';
+await import("planck");
+// import { "planck.min.js", "p5play.js" } as p5play from 'p5play';
+import { } from 
 import { fetchHighScores } from "/src/fetch.js";
 import { addHighScores } from "/src/add.js";
 
@@ -29,6 +30,7 @@ import fallingObjectImg1Path from '/src/assets/tacoCat1.png';
 import fallingObjectImg2Path from '/src/assets/tacoCat2.png';
 import badFallingObjectImgPath from '/src/assets/pugBurger.png';
 import heartImgPath from '/src/assets/health.png';
+import p5 from 'p5';
 var backgroundImg;
 var catcherImg;
 var fallingObjectImg1;
@@ -69,11 +71,11 @@ sketch.setup = function () {
 };
 
 sketch.draw = function () {
-  background(127); // grey
-  fill(255, 0, 0); // red
-  noStroke();
-  rectMode(CENTER);
-  rect(width / 2, height / 2, 50, 50);
+  // background(127); // grey
+  // fill(255, 0, 0); // red
+  // noStroke();
+  // rectMode(CENTER);
+  // rect(width / 2, height / 2, 50, 50);
   //set up screen
   // background(bgColor);
   if (screen == 0) {
@@ -92,8 +94,8 @@ sketch.draw = function () {
       screen = 0;
       backButton.pos = {x: -900, y: -900};
       homeScreen();
-      }
     }
+  }
 
     if (screen == 2) {
 
@@ -267,7 +269,8 @@ sketch.draw = function () {
       // allSprites.debug = mouse.pressing();
 
 };
-function restart() {
+
+sketch.restart = function () {
   if (mouseIsPressed) {
     score = 0;
     lives = 3;
@@ -288,28 +291,67 @@ function restart() {
     badFallingObject.direction = 'down';
   }
 }
+// function restart() {
+  // if (mouseIsPressed) {
+  //   score = 0;
+  //   lives = 3;
+  //   level = 1;
+  //   fallingObjectSpeed = 0;
+  //   catcherSpeed = 0;
+  //   newHighScore = false;
+  //   catcher.x = 200;
+  //   catcher.y = 370;
+  //   fallingObject.y = 0;
+  //   fallingObject.x = random(width);
+  //   fallingObject.vel.y = 2;
+  //   fallingObject.direction = 'down';
+  //   badFallingObject.y = 0;
+  //   badFallingObject.x = random(width);
+  //   badFallingObject.color = color(0,128,128);
+  //   badFallingObject.vel.y = 2;
+  //   badFallingObject.direction = 'down';
+  // }
+// }
 
-function youWin() {
-  //Create win state
-  if (score > 5) {
-    catcher.x = 500;
-    fallingObject.y = -500;
-    badFallingObject.x = -500;
-    background(bgColor);
-    textSize(30);
-    textAlign('center');
-    fill(highScoreColor);
-    text('You win!', 200, 200);
-
-    textSize(15);
-    textStyle('normal');
-    fill(textColor);
-    text('Click anywhere to play again', 200, 220);
-    restart();
-  }
+sketch.youWin = function () {
+    //Create win state
+    if (score > 5) {
+      catcher.x = 500;
+      fallingObject.y = -500;
+      badFallingObject.x = -500;
+      background(bgColor);
+      textSize(30);
+      textAlign('center');
+      fill(highScoreColor);
+      text('You win!', 200, 200);
+  
+      textSize(15);
+      textStyle('normal');
+      fill(textColor);
+      text('Click anywhere to play again', 200, 220);
+      restart();
+    }
 }
+// function youWin() {
+//   //Create win state
+//   if (score > 5) {
+//     catcher.x = 500;
+//     fallingObject.y = -500;
+//     badFallingObject.x = -500;
+//     background(bgColor);
+//     textSize(30);
+//     textAlign('center');
+//     fill(highScoreColor);
+//     text('You win!', 200, 200);
 
-function homeScreen() {
+//     textSize(15);
+//     textStyle('normal');
+//     fill(textColor);
+//     text('Click anywhere to play again', 200, 220);
+//     restart();
+//   }
+// }
+sketch.homeScreen = function () {
   background(bgColor);
 
   fill(textColor);
@@ -324,7 +366,7 @@ function homeScreen() {
   noStroke();
 
   //navigationButtons
-  directionsButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
+  p5play.directionsButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
   directionsButton.color = textColor;
   directionsButton.text = "How to Play";
   directionsButton.textSize = 16;
@@ -332,21 +374,52 @@ function homeScreen() {
   directionsButton.stroke = highScoreColor;
   directionsButton.strokeWeight = 3;
 
-  playButton = new p5play.Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
+  playButton = new Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
   playButton.color = textColor;
   playButton.text = "Play";
   playButton.textSize = 16;
   playButton.textColor = highScoreColor;
   playButton.stroke = highScoreColor;
   playButton.strokeWeight = 3;
+  
 }
+// function homeScreen() {
+//   background(bgColor);
 
-function directionsScreen(p, play) {
-  p.background(bgColor);
+//   fill(textColor);
+//   textSize(40);
+//   textStyle('bold');
+//   textAlign(CENTER);
+//   stroke(highScoreColor);
+//   strokeWeight(2);
+//   text("Taco Cat Catcher", width/2, height/2 - 80);
+
+//   textStyle('normal');
+//   noStroke();
+
+//   //navigationButtons
+//   directionsButton = p5play.createSpriteSprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
+//   directionsButton.color = textColor;
+//   directionsButton.text = "How to Play";
+//   directionsButton.textSize = 16;
+//   directionsButton.textColor = highScoreColor;
+//   directionsButton.stroke = highScoreColor;
+//   directionsButton.strokeWeight = 3;
+
+//   playButton = p5play.createSprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
+//   playButton.color = textColor;
+//   playButton.text = "Play";
+//   playButton.textSize = 16;
+//   playButton.textColor = highScoreColor;
+//   playButton.stroke = highScoreColor;
+//   playButton.strokeWeight = 3;
+// }
+sketch.directionsScreen = function () {
+  background(bgColor);
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
-  backButton = new play.Sprite(width/2, height/2 + 80, 100, 70, 'k');
+  backButton = new Sprite(width/2, height/2 + 80, 100, 70, 'k');
   backButton.color = textColor;
   backButton.text = "Home";
   backButton.textSize = 16;
@@ -354,51 +427,104 @@ function directionsScreen(p, play) {
   backButton.stroke = highScoreColor;
   backButton.strokeWeight = 3;
 
-  p.fill(textColor);
-  p.stroke(highScoreColor);
-  p.strokeWeight(2);
-  p.textSize(40);
-  p.textStyle('bold');
-  p.textAlign(CENTER);
-  p.text("How to Play", width/2, height/2 - 100);
+  fill(textColor);
+  stroke(highScoreColor);
+  strokeWeight(2);
+  textSize(40);
+  textStyle('bold');
+  textAlign(CENTER);
+  text("How to Play", width/2, height/2 - 100);
 
-  p.textStyle('normal');
-  p.noStroke();
+  textStyle('normal');
+  noStroke();
 
   // Draw directions to screen
-  p.rectMode(CENTER);
-  p.fill(textColor);
-  p.textSize(18);
-  p.textAlign(CENTER);
-  p.text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
+  rectMode(CENTER);
+  fill(textColor);
+  textSize(18);
+  textAlign(CENTER);
+  text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
 }
+// function directionsScreen() {
+//   background(bgColor);
+//   playButton.pos = {x: -600, y: -600};
+//   directionsButton.pos = {x: -800, y: -800};
 
-function playScreenAssets(p, play) {
-  timeUntilPlay = p.millis();
+//   backButton = new createSprite(width/2, height/2 + 80, 100, 70, 'k');
+//   backButton.color = textColor;
+//   backButton.text = "Home";
+//   backButton.textSize = 16;
+//   backButton.textColor = highScoreColor;
+//   backButton.stroke = highScoreColor;
+//   backButton.strokeWeight = 3;
+
+//   fill(textColor);
+//   stroke(highScoreColor);
+//   strokeWeight(2);
+//   textSize(40);
+//   textStyle('bold');
+//   textAlign(CENTER);
+//   text("How to Play", width/2, height/2 - 100);
+
+//   textStyle('normal');
+//   noStroke();
+
+//   // Draw directions to screen
+//   rectMode(CENTER);
+//   fill(textColor);
+//   textSize(18);
+//   textAlign(CENTER);
+//   text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
+// }
+sketch.playScreenAssets = function () {
+  timeUntilPlay = millis();
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
   //Create catcher 
-  catcher = new play.Sprite(catcherImg, 200, 370, 80, 50, 'k');
+  catcher = new Sprite(catcherImg, 200, 370, 80, 50, 'k');
   catcher.color = color(95,158,160);
   catcher.img.scale = 0.1563;
 
   //Create falling objects
-  fallingObject = new play.Sprite(fallingObjectImg1, 100, 0, 45, 42);
+  fallingObject = new Sprite(fallingObjectImg1, 100, 0, 45, 42);
   // fallingObject.color = color(0,128,128);
   // fallingObject.img.scale = 0.0223;
   fallingObject.vel.y = 2;
   fallingObject.rotationLock = true;
 
   //TO-DO: figure out if I can delay the creation of this sprite for a few secs
-  badFallingObject = new play.Sprite(badFallingObjectImg, 150, -20, 35, 40);
+  badFallingObject = new Sprite(badFallingObjectImg, 150, -20, 35, 40);
   badFallingObject.color = color(0,128,128);
   badFallingObject.img.scale = 0.09;
 
   badFallingObject.rotationLock = true;  
 }
+// function playScreenAssets() {
+//   timeUntilPlay = millis();
+//   playButton.pos = {x: -600, y: -600};
+//   directionsButton.pos = {x: -800, y: -800};
 
-function checkLevel(p) {
+//   //Create catcher 
+//   catcher = new createSprite(catcherImg, 200, 370, 80, 50, 'k');
+//   catcher.color = color(95,158,160);
+//   catcher.img.scale = 0.1563;
+
+//   //Create falling objects
+//   fallingObject = new createSprite(fallingObjectImg1, 100, 0, 45, 42);
+//   // fallingObject.color = color(0,128,128);
+//   // fallingObject.img.scale = 0.0223;
+//   fallingObject.vel.y = 2;
+//   fallingObject.rotationLock = true;
+
+//   //TO-DO: figure out if I can delay the creation of this sprite for a few secs
+//   badFallingObject = new createSprite(badFallingObjectImg, 150, -20, 35, 40);
+//   badFallingObject.color = color(0,128,128);
+//   badFallingObject.img.scale = 0.09;
+
+//   badFallingObject.rotationLock = true;  
+// }
+sketch.checkLevel = function () {
   if (score % 5 == 0 && score !== 0) {
     if (level !== score/5 + 1) {
       level = score/5 + 1;
@@ -418,6 +544,26 @@ function checkLevel(p) {
     // }
   }
 }
+// function checkLevel() {
+//   if (score % 5 == 0 && score !== 0) {
+//     if (level !== score/5 + 1) {
+//       level = score/5 + 1;
+//       fallingObjectSpeed += 0.25;
+//       console.log('increased speed to ' + fallingObjectSpeed);
+//     }
+
+//     // console.log('increased speed to ' + fallingObjectSpeed);
+//     // checkLevelLoop += 1
+//     // console.log(checkLevelLoop);
+//     // if (checkLevelLoop % 2 !== 0) {
+//       // console.log('checkLevelLoop is odd');
+//       // fallingObjectSpeed += 0.05;
+//     // } else if (checkLevelLoop % 2 === 0) {
+//       // console.log('checkLevelLoop is even');
+//       // catcherSpeed += 0.10;
+//     // }
+//   }
+// }
 
 sketch.mousePressed = function () {
   console.log(`I am here at ${mouseX}:${mouseY}`);
