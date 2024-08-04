@@ -10,6 +10,10 @@ module.exports = defineConfig({
         // single: resolve(__dirname, 'single_sketch.html'),
         // multi: resolve(__dirname, 'multi_sketch.html')
       }
-    }
+    },
+    sourcemap: true,
+  },
+  css: {
+    devSourcemap: true,
   }
 })

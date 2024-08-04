@@ -2,7 +2,7 @@ import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 await import("planck");
 // import { "planck.min.js", "p5play.js" } as p5play from 'p5play';
-import { } from 
+// import * as playing from "p5play";
 import { fetchHighScores } from "/src/fetch.js";
 import { addHighScores } from "/src/add.js";
 
@@ -366,7 +366,7 @@ sketch.homeScreen = function () {
   noStroke();
 
   //navigationButtons
-  p5play.directionsButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
+  p5play.directionsButton = new playing.Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
   directionsButton.color = textColor;
   directionsButton.text = "How to Play";
   directionsButton.textSize = 16;
@@ -374,7 +374,7 @@ sketch.homeScreen = function () {
   directionsButton.stroke = highScoreColor;
   directionsButton.strokeWeight = 3;
 
-  playButton = new Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
+  playButton = new playing.Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
   playButton.color = textColor;
   playButton.text = "Play";
   playButton.textSize = 16;
@@ -419,7 +419,7 @@ sketch.directionsScreen = function () {
   playButton.pos = {x: -600, y: -600};
   directionsButton.pos = {x: -800, y: -800};
 
-  backButton = new Sprite(width/2, height/2 + 80, 100, 70, 'k');
+  backButton = new playing.Sprite(width/2, height/2 + 80, 100, 70, 'k');
   backButton.color = textColor;
   backButton.text = "Home";
   backButton.textSize = 16;
@@ -487,7 +487,7 @@ sketch.playScreenAssets = function () {
   catcher.img.scale = 0.1563;
 
   //Create falling objects
-  fallingObject = new Sprite(fallingObjectImg1, 100, 0, 45, 42);
+  fallingObject = new playing.Sprite(fallingObjectImg1, 100, 0, 45, 42);
   // fallingObject.color = color(0,128,128);
   // fallingObject.img.scale = 0.0223;
   fallingObject.vel.y = 2;
