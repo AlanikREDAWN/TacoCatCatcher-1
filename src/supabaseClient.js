@@ -1,5 +1,5 @@
 
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from './node_modules @supabase/supabase-js';
 import * as dotenv from 'dotenv'
 // dotenv.config();
 // Create a single supabase client for interacting with your database

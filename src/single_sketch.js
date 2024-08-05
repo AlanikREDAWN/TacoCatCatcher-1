@@ -78,7 +78,7 @@ let highScoreColor = '#d3eddc';
 
 function setup() {
   createCanvas(400, 400);
-  background.color = '#6c5190';
+  // background.color = '#6c5190';
   // time = millis();
 
   // homeScreen();
@@ -97,7 +97,11 @@ function setup() {
 // };
 
 function draw(){
-
+  background(127); // grey
+  fill(255, 0, 0); // red
+  noStroke();
+  rectMode(CENTER);
+  rect(width / 2, height / 2, 50, 50);
   // if (screen == 0) {
   //   if (directionsButton.mouse.pressed()) {
   //     screen = 1;
