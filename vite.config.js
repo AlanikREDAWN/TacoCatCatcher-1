@@ -11,9 +11,9 @@ module.exports = defineConfig({
         // multi: resolve(__dirname, 'multi_sketch.html')
       }
     },
-    sourcemap: true,
+    // sourcemap: true,
   },
-  css: {
-    devSourcemap: true,
-  }
+  // css: {
+    // devSourcemap: true,
+  // }
 })
