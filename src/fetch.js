@@ -1,7 +1,8 @@
-import { supabase } from "./supabaseClient.js";
+// const supabase = require("./supabaseClient.js");
+// import { supabase } from "./supabaseClient.js";
 
 async function fetchHighScores() {
-	const { data: High_Scores, error } = await supabase
+	const { data: High_Scores, error } = await _supabase
 	.from('High_Scores')
 	.select('*')
 	.order('score', { ascending: false });
@@ -14,4 +15,5 @@ async function fetchHighScores() {
 	return High_Scores;
 }
 
-export { fetchHighScores };
+// export { fetchHighScores };
+// module.exports = fetchHighScores;
