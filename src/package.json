@@ -5,6 +5,7 @@
 	"author": "p5play",
 	"license": "CC0",
 	"dependencies": {
+		"@supabase/supabase-js": "^2.45.1",
 		"p5": "^1.9.2",
 		"p5play": "^3.21.4",
 		"q5": "^1.9.16",
