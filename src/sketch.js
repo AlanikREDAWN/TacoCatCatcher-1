@@ -46,7 +46,8 @@ function preload() {
 }
 
 function setup() {
-	new Canvas(500, 500);
+	// new Canvas(500, 500);
+	new Canvas(400, 400);
 
 	// ball = new Sprite();
 	// ball.diameter = 50;
@@ -135,9 +136,9 @@ function draw() {
         }
 
         //Move catcher
-        if (play.kb.pressing("left")) {
+        if (kb.pressing("left")) {
           catcher.vel.x = -3;
-        } else if (play.kb.pressing("right")) {
+        } else if (kb.pressing("right")) {
           catcher.vel.x = 3;
         } else {
           catcher.vel.x = 0;
@@ -239,25 +240,14 @@ function draw() {
             text('NEW HIGH SCORE', width/2, height/2 + 140);
           }
 
-		  restartButton = new Sprite(width/2 - 100, height/2 + 50, 100, 70, 'k');
-		  restartButton.color = textColor;
-		  restartButton.text = "How to Play";
-		  restartButton.textSize = 16;
-		  restartButton.textColor = highScoreColor;
-		  restartButton.stroke = highScoreColor;
-		  restartButton.strokeWeight = 3;
+		  		restartButton.x = width/2 - 100;
+		  		restartButton.y = height/2 - 100;
 
-		  viewLeaderboard = new Sprite(width/2 + 100, height/2 + 50, 100, 70, 'k');
-		  viewLeaderboard.color = textColor;
-		  viewLeaderboard.text = "Play";
-		  viewLeaderboard.textSize = 16;
-		  viewLeaderboard.textColor = highScoreColor;
-		  viewLeaderboard.stroke = highScoreColor;
-		  viewLeaderboard.strokeWeight = 3;
-
+		  		viewLeaderboard.x = width/2 + 100;
+		  		viewLeaderboard.y = height/2 - 100;
           restart();
         }
-
+			
         // youWin();
 
       }
@@ -279,7 +269,13 @@ function draw() {
 }
 
 function restart() {
-	if (mouseIsPressed) {
+
+
+	if (restartButton.mouse.pressed()) {
+	  restartButton.x = 1000;
+	  restartButton.y = 1000;
+	  viewLeaderboard.x = 1500;
+	  viewLeaderboard.y = 1500;
 	  score = 0;
 	  lives = 3;
 	  level = 1;
@@ -297,6 +293,13 @@ function restart() {
 	  badFallingObject.color = color(0,128,128);
 	  badFallingObject.vel.y = 2;
 	  badFallingObject.direction = 'down';
+	}
+
+	if (viewLeaderboard.mousePressed()) {
+		restartButton.x = 1000;
+	 	restartButton.y = 1000;
+	  viewLeaderboard.x = 1500;
+	  viewLeaderboard.y = 1500;
 	}
   }
 
@@ -350,6 +353,28 @@ function homeScreen() {
 	playButton.textColor = highScoreColor;
 	playButton.stroke = highScoreColor;
 	playButton.strokeWeight = 3;
+
+	restartButton = new Sprite(width/2 - 100, height/2 - 100, 110, 70, 'k');
+	restartButton.color = textColor;
+	restartButton.text = "Restart";
+	restartButton.textSize = 16;
+	restartButton.textColor = highScoreColor;
+	restartButton.stroke = highScoreColor;
+	restartButton.strokeWeight = 3;
+
+	viewLeaderboard = new Sprite(width/2 + 100, height/2 - 100, 110, 70, 'k');
+	viewLeaderboard.color = textColor;
+	viewLeaderboard.text = "View \nLeaderboard";
+	viewLeaderboard.textSize = 16;
+	viewLeaderboard.textColor = highScoreColor;
+	viewLeaderboard.stroke = highScoreColor;
+	viewLeaderboard.strokeWeight = 3;
+
+	restartButton.x = 1000;
+	restartButton.y = 1000;
+
+	viewLeaderboard.x = 1000;
+	viewLeaderboard.y = 1000;
   }
 
   function directionsScreen() {
