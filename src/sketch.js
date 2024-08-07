@@ -9,6 +9,7 @@ let catcher, fallingObject, badFallingObject;
 let playButton, directionsButton, backButton, viewLeaderboard, restartButton;
 //ints
 let score = 0;
+let buttonsShown = false;
 let highScore = 0;
 let screen = 0;
 var time;
@@ -71,24 +72,24 @@ function draw() {
 //   noStroke();
 //   rectMode(CENTER);
 //   rect(width / 2, height / 2, 50, 50);
-  if (screen == 0) {
-    if (directionsButton.mouse.pressed()) {
-      screen = 1;
-      directionsScreen();
-    } else if (playButton.mouse.pressed()) {
-      screen = 2;
+	if (screen == 0) {
+    	if (directionsButton.mouse.pressed()) {
+      		screen = 1;
+      		directionsScreen();
+    	} else if (playButton.mouse.pressed()) {
+      		screen = 2;
 
-      playScreenAssets();
-    }
-  }
+      		playScreenAssets();
+    	}
+  	}
 
-  if (screen == 1) {
-    if (backButton.mouse.pressed()) {
-      screen = 0;
-      backButton.pos = {x: -900, y: -900};
-      homeScreen();
-    }
-  }
+  	if (screen == 1) {
+    	if (backButton.mouse.pressed()) {
+      		screen = 0;
+      		backButton.pos = {x: -900, y: -900};
+      		homeScreen();
+    	}
+  	}
 
     if (screen == 2) {
 
@@ -99,81 +100,81 @@ function draw() {
       image(backgroundImg, 330, 5, 60, 79.711);
 
       //draw lives
-      if (lives >= 2) {
-        image(heartImg, 140, 5, 50, 39.808);
-        if (lives >= 3) {
-          image(heartImg, 200, 5, 50, 39.808);
-          if (lives >= 4) {
-            image(heartImg, 260, 5, 50, 39.808);
-          }
-        }
-      }
+      	if (lives >= 2) {
+        	image(heartImg, 140, 5, 50, 39.808);
+        		if (lives >= 3) {
+          			image(heartImg, 200, 5, 50, 39.808);
+          			if (lives >= 4) {
+            		image(heartImg, 260, 5, 50, 39.808);
+          			}
+        		}
+     	}
 
-      if (((millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
-        badFallingObject.vel.y = 2;
-        fallen = true;
-      }
+      	if (((millis() - loadTime - timeUntilPlay) > wait) && (!fallen)) {
+        	badFallingObject.vel.y = 2;
+        	fallen = true;
+      	}
 
-      if (fallingObject.img == fallingObjectImg1) {
-        fallingObject.img.scale = 0.0223;
-      } else if (fallingObject.img == fallingObjectImg2) {
-        fallingObject.img.scale = 0.088;
-      }
+      	if (fallingObject.img == fallingObjectImg1) {
+     		fallingObject.img.scale = 0.0223;
+      	} else if (fallingObject.img == fallingObjectImg2) {
+        	fallingObject.img.scale = 0.088;
+      	}
 
-      //If fallingObject reaches bottom, move back to random position at top
-      if (fallingObject.y >= height) {
-        fallingObject.y = 0;
-        fallingObject.x = random(width);
-        fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-        // score -= 1;
-        lives -= 1;
-      }
+      	//If fallingObject reaches bottom, move back to random position at top
+      	if (fallingObject.y >= height) {
+        	fallingObject.y = 0;
+        	fallingObject.x = random(width);
+        	fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+        	// score -= 1;
+        	lives -= 1;
+      	}
         //If badFallingObject reaches bottom, move back to random position at top
         if (badFallingObject.y >= height) {
-          badFallingObject.y = 0;
-          badFallingObject.x = random(width);
-          badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+          	badFallingObject.y = 0;
+          	badFallingObject.x = random(width);
+          	badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
         }
 
         //Move catcher
         if (kb.pressing("left")) {
-          catcher.vel.x = -3;
+          	catcher.vel.x = -3;
         } else if (kb.pressing("right")) {
-          catcher.vel.x = 3;
+          	catcher.vel.x = 3;
         } else {
-          catcher.vel.x = 0;
+          	catcher.vel.x = 0;
         }
 
         //Stop catcher at edges of screen
         if (catcher.x < 50) {
-          catcher.x = 50;
+          	catcher.x = 50;
         } else if (catcher.x > 350) {
-          catcher.x = 350;
+          	catcher.x = 350;
         }
 
         //If fallingObject collides with catcher, move back to random position at top
         if (fallingObject.collides(catcher)) {
-          fallingObject.y = 0;
-          fallingObject.x = random(width);
-          fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-          fallingObject.direction = 'down';
-          score += 1;
+          	fallingObject.y = 0;
+          	fallingObject.x = random(width);
+          	fallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+          	fallingObject.direction = 'down';
+          	score += 1;
         }
 
         //If badFallingObject collides with catcher, move back to random position at top
         if (badFallingObject.collides(catcher)) {
-          badFallingObject.y = 0;
-          badFallingObject.x = random(width);
-          badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
-          badFallingObject.direction = 'down';
-          // score -= 1;
-          lives -= 1;
+          	badFallingObject.y = 0;
+          	badFallingObject.x = random(width);
+          	badFallingObject.vel.y = random(1, 3) + fallingObjectSpeed;
+          	badFallingObject.direction = 'down';
+          	// score -= 1;
+          	lives -= 1;
         }
 
         if (fallingObject.collides(badFallingObject)) {
-          fallingObject.direction = 'down';
-          badFallingObject.direction = 'down';
-          print('down');
+          	fallingObject.direction = 'down';
+          	badFallingObject.direction = 'down';
+          	print('down');
         }
 
         //Display score
@@ -184,19 +185,19 @@ function draw() {
         text('Score: ' + score, 10, 25);
 
         if (score >= highScore && score !== 0) {
-          fill(highScoreColor);
-          highScore = score; 
-          if (newHighScore == false) {
-            newHighScore = true;
-          }
+          	fill(highScoreColor);
+          	highScore = score; 
+          	if (newHighScore == false) {
+            	newHighScore = true;
+          	}
         } else {
-          fill(textColor);
+          	fill(textColor);
         }
 
         if (fallingObject.collides(badFallingObject)) {
-          fallingObject.direction = 'down';
-          badFallingObject.direction = 'down';
-          print('down');
+          	fallingObject.direction = 'down';
+          	badFallingObject.direction = 'down';
+          	print('down');
         }
 
         text('High Score: ' + highScore, 10, 45);
@@ -214,43 +215,48 @@ function draw() {
 
         //Create lose state
         if (lives < 1) {
-          catcher.x = 500;
-          fallingObject.y = -500;
-          badFallingObject.x = -500;
-          background(bgColor);
-          textSize(30);
-          textAlign('center');
-          fill(textColor);
-          text('You lost!', 200, 200);
+          	catcher.x = 500;
+          	fallingObject.y = -500;
+          	badFallingObject.x = -500;
+          	
+			if (buttonsShown == false) {
 
-          textSize(15);
-          textStyle('normal');
-          fill(highScoreColor);
-          text('Click anywhere to play again', 200, 220);
+				background(bgColor);
+          		textSize(30);
+          		textAlign('center');
+          		fill(textColor);
+          		text('You lost!', 200, 200);
 
-          textSize(18);
-          textStyle('bold');
-          fill(textColor);
-          text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
+          		textSize(15);
+          		textStyle('normal');
+          		fill(highScoreColor);
+          		text('Click anywhere to play again', 200, 220);
 
-          text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
+        		textSize(18);
+          		textStyle('bold');
+          		fill(textColor);
+        		text('Your score:\n'+ score, width/2 - 100, height/2 + 90)
 
-          if (newHighScore == true) {
-            fill(highScoreColor);
-            text('NEW HIGH SCORE', width/2, height/2 + 140);
-          }
+        		text('Your high\n score:\n'+ highScore, width/2 + 100, height/2 + 100)
+
+        		if (newHighScore == true) {
+            		fill(highScoreColor);
+            		text('NEW HIGH SCORE', width/2, height/2 + 140);
+          		}
 
 		  		restartButton.x = width/2 - 100;
 		  		restartButton.y = height/2 - 100;
 
 		  		viewLeaderboard.x = width/2 + 100;
 		  		viewLeaderboard.y = height/2 - 100;
-          restart();
+				buttonsShown = true;
+			}
+        	restart();
         }
 			
         // youWin();
 
-      }
+    }
     //   //set up screen
     //   background(bgColor);
     //   //Draw background image
@@ -272,54 +278,55 @@ function restart() {
 
 
 	if (restartButton.mouse.pressed()) {
-	  restartButton.x = 1000;
-	  restartButton.y = 1000;
-	  viewLeaderboard.x = 1500;
-	  viewLeaderboard.y = 1500;
-	  score = 0;
-	  lives = 3;
-	  level = 1;
-	  fallingObjectSpeed = 0;
-	  catcherSpeed = 0;
-	  newHighScore = false;
-	  catcher.x = 200;
-	  catcher.y = 370;
-	  fallingObject.y = 0;
-	  fallingObject.x = random(width);
-	  fallingObject.vel.y = 2;
-	  fallingObject.direction = 'down';
-	  badFallingObject.y = 0;
-	  badFallingObject.x = random(width);
-	  badFallingObject.color = color(0,128,128);
-	  badFallingObject.vel.y = 2;
-	  badFallingObject.direction = 'down';
-	}
-
-	if (viewLeaderboard.mousePressed()) {
+	  	restartButton.x = 1000;
+	  	restartButton.y = 1000;
+	  	viewLeaderboard.x = 1500;
+	  	viewLeaderboard.y = 1500;
+	  	score = 0;
+	  	lives = 3;
+	  	level = 1;
+	  	fallingObjectSpeed = 0;
+	  	catcherSpeed = 0;
+	  	newHighScore = false;
+	  	catcher.x = 200;
+	  	catcher.y = 370;
+	  	fallingObject.y = 0;
+	  	fallingObject.x = random(width);
+	  	fallingObject.vel.y = 2;
+	  	fallingObject.direction = 'down';
+	  	badFallingObject.y = 0;
+	  	badFallingObject.x = random(width);
+	  	badFallingObject.color = color(0,128,128);
+	  	badFallingObject.vel.y = 2;
+	  	badFallingObject.direction = 'down';
+	} else if (viewLeaderboard.mouse.pressed()) {
+		// restartButton.color = rebeccaPurple;
 		restartButton.x = 1000;
 	 	restartButton.y = 1000;
-	  viewLeaderboard.x = 1500;
-	  viewLeaderboard.y = 1500;
+		viewLeaderboard.x = 1500;
+		viewLeaderboard.y = 1500;
+		background(bgColor);
+
 	}
   }
 
 function youWin() {
 	//Create win state
 	if (score > 5) {
-	  catcher.x = 500;
-	  fallingObject.y = -500;
-	  badFallingObject.x = -500;
-	  background(bgColor);
-	  textSize(30);
-	  textAlign('center');
-	  fill(highScoreColor);
-	  text('You win!', 200, 200);
+	  	catcher.x = 500;
+	  	fallingObject.y = -500;
+	  	badFallingObject.x = -500;
+	  	background(bgColor);
+	  	textSize(30);
+	  	textAlign('center');
+	  	fill(highScoreColor);
+	  	text('You win!', 200, 200);
   
-	  textSize(15);
-	  textStyle('normal');
-	  fill(textColor);
-	  text('Click anywhere to play again', 200, 220);
-	  restart();
+	  	textSize(15);
+	  	textStyle('normal');
+	  	fill(textColor);
+	  	text('Click anywhere to play again', 200, 220);
+	  	restart();
 	}
 }
 
@@ -375,9 +382,9 @@ function homeScreen() {
 
 	viewLeaderboard.x = 1000;
 	viewLeaderboard.y = 1000;
-  }
+}
 
-  function directionsScreen() {
+function directionsScreen() {
 	background(bgColor);
 	playButton.pos = {x: -600, y: -600};
 	directionsButton.pos = {x: -800, y: -800};
@@ -407,9 +414,9 @@ function homeScreen() {
 	textSize(18);
 	textAlign(CENTER);
 	text("Move the plate with the left and right arrow keys to catch the taco cats and avoid the imposters", width/2, height/2 - 20, 300, 100);
-  }
+}
 
-  function playScreenAssets() {
+function playScreenAssets() {
 	timeUntilPlay = millis();
 	playButton.pos = {x: -600, y: -600};
 	directionsButton.pos = {x: -800, y: -800};
@@ -432,15 +439,15 @@ function homeScreen() {
 	badFallingObject.img.scale = 0.09;
   
 	badFallingObject.rotationLock = true;  
-  }
+}
 
-  function checkLevel() {
+function checkLevel() {
 	if (score % 5 == 0 && score !== 0) {
-	  if (level !== score/5 + 1) {
-	    level = score/5 + 1;
-	    fallingObjectSpeed += 0.25;
-	    console.log('increased speed to ' + fallingObjectSpeed);
-	  }
+	  	if (level !== score/5 + 1) {
+	    	level = score/5 + 1;
+	    	fallingObjectSpeed += 0.25;
+	    	console.log('increased speed to ' + fallingObjectSpeed);
+	  	}
   
 	  // console.log('increased speed to ' + fallingObjectSpeed);
 	  // checkLevelLoop += 1
@@ -453,9 +460,9 @@ function homeScreen() {
 	    // catcherSpeed += 0.10;
 	  // }
 	}
-  }
+}
 
-  function mousePressed() {
+function mousePressed() {
 	  console.log(`I am here at ${mouseX}:${mouseY}`);
 	// addHighScores("LSD", 10);
-  }
+}
