@@ -3,7 +3,7 @@ This game was started in the 2024 Girls Who Code SIP (Summer Immersion Program),
 
 ## Where Can I Play It?
 
-Well, currently this game is still a work in progress. When it's completed, I'll put the link to the deployed game here! (See [TODO](https://github.com/AlanikREDAWN/Taco-Cat-Catcher/blob/main/README.md#to-do) for more details on my progress)
+<https://tacocatcatcher.kittycat.hackclub.app/>
 
 ##  Attributions
 
