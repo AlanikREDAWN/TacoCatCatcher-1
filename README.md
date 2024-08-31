@@ -36,6 +36,10 @@ This game was started in the 2024 Girls Who Code SIP (Summer Immersion Program),
 - [ ] Add animations?
 - [ ] Change canvas size?
 
+Demo Photo:
+![Screenshot 2024-08-25 at 3 27 19 PM](https://github.com/user-attachments/assets/fbdaa281-0d16-4acc-aad8-5d0689c3d04d)
+
+
 <!-- Not sure if I need this
 ## File Overview
 
