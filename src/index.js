@@ -26,6 +26,7 @@ let catcherSpeed = 0;
 let wait = 250;
 let timeUntilPlay, loadTime;
 let fallen = false;
+
 // let checkLevelLoop = 0;
 //images
 import backgroundImgPath from './assets/burritoCat.png';

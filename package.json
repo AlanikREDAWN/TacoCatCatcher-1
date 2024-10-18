@@ -13,8 +13,9 @@
     "vite": "^2.9.18"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.44.3",
+    "@supabase/supabase-js": "^2.45.5",
     "dotenv": "^16.4.5",
+    "firebase": "^10.14.1",
     "node": "^20.16.0",
     "p5": "^1.10.0",
     "p5js-wrapper": "^1.2.3",
