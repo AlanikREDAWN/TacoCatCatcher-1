@@ -11,49 +11,28 @@
 // // TODO: Add SDKs for Firebase products that you want to use
 // // https://firebase.google.com/docs/web/setup#available-libraries
 
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBP94rAUyUGx1YAYJeY7xV6tdzMfse1Zd0",
-//   authDomain: "taco-cat-catcher.firebaseapp.com",
-//   projectId: "taco-cat-catcher",
-//   storageBucket: "taco-cat-catcher.appspot.com",
-//   messagingSenderId: "73955671034",
-//   appId: "1:73955671034:web:c58155e45bf352e0990243",
-//   databaseURL: "https://taco-cat-catcher-default-rtdb.firebaseio.com",
-// };
-
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const database = getDatabase(app);
 // import { supabase } from '@/supabase';
 // import(createClient);
-const { createClient } = supabase
-import createClient from "@supabase/supabase-js"
-// const _supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
-
-// console.log('Supabase Instance: ', _supabase)
-// import * as dotenv from 'dotenv'
-// dotenv.config();
-// Create a single supabase client for interacting with your database
-// const env = await import.meta.env;
-// const supabaseUrl = 'https://mclocptznsrsjhomxkyo.supabase.co';
-// const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jbG9jcHR6bnNyc2pob214a3lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyOTg2NDQsImV4cCI6MjAzNTg3NDY0NH0.TwuqIwoGOaAx31XpxA2CVvxu5QWLeRyeyhXHxpt4-yA';
+// const { createClient } = supabase
 
 
+// import { createClient } from "@supabase/supabase-js"
+// const supabaseUrl = 'https://mclocptznsrsjhomxkyo.supabase.co'
+// const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jbG9jcHR6bnNyc2pob214a3lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyOTg2NDQsImV4cCI6MjAzNTg3NDY0NH0.TwuqIwoGOaAx31XpxA2CVvxu5QWLeRyeyhXHxpt4-yA"
+// console.log(supabaseKey);
+// console.log("test");
 // const supabase = createClient(supabaseUrl, supabaseKey);
-// const _supabase = createClient(supabaseUrl, supabaseKey);
-// const _supabase = createClient(supabaseUrl, supabaseKey);
-// console.log('Supabase Instance: ', _supabase);
-// console.log('Supabase Instance: ', _supabase);
-// import { createClient, supabaseClient } from '@supabase/supabase-js'
+// console.log('Supabase Instance: ', supabase);
 
-// Create a single supabase client for interacting with your database
-const supabaseUrl = 'https://mclocptznsrsjhomxkyo.supabase.co'
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jbG9jcHR6bnNyc2pob214a3lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjAyOTg2NDQsImV4cCI6MjAzNTg3NDY0NH0.TwuqIwoGOaAx31XpxA2CVvxu5QWLeRyeyhXHxpt4-yA"
-console.log(supabaseKey);
-console.log("test");
-const _supabase = createClient(supabaseUrl, supabaseKey);
-console.log('Supabase Instance: ', _supabase);
+
+// let { data: High_Scores, error } = await supabase
+//   .from('High_Scores')
+//   .select('*')
+//   .order('score', { ascending: false });
+
 
 /* VARIABLES */
 //sprites
@@ -97,11 +76,6 @@ let firstHighScore;
 
 let ball;
 
-
-// let { data: High_Scores, error } = await _supabase
-//   .from('High_Scores')
-//   .select('*')
-//   .order('score', { ascending: false });
 
 function preload() {
 	backgroundImg = loadImage('assets/burritoCat.png');
